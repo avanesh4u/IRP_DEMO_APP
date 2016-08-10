@@ -1,15 +1,23 @@
 package com.capgemini.model;
 
+import java.util.Arrays;
+
 public class Student {
 	
 	private int rollNumber;
 	private String name;
-	private String[] courseName;
+	private String[] courseNames;
 	
 	public Student(int rollNumber, String name) {
 		super();
 		this.rollNumber = rollNumber;
 		this.name = name;
+	}
+	public Student(int rollNumber, String name, String[] courseNames) {
+		super();
+		this.rollNumber = rollNumber;
+		this.name = name;
+		this.courseNames = courseNames;
 	}
 	public int getRollNumber() {
 		return rollNumber;
@@ -23,13 +31,16 @@ public class Student {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	public String[] getCourseName() {
-		return courseName;
+	public String[] getCourseNames() {
+		return courseNames;
 	}
-	public void setCourseName(String[] courseName) {
-		this.courseName = courseName;
+	public void setCourseNames(String[] courseNames) {
+		this.courseNames = courseNames;
 	}
-	
+	@Override
+	public String toString() {
+		return "Student [rollNumber=" + rollNumber + ", name=" + name + ", courseNames=" + Arrays.toString(courseNames)
+				+ "]";
+	}
 
 }

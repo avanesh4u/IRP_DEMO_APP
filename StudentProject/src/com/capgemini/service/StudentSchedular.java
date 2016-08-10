@@ -6,42 +6,52 @@ public class StudentSchedular {
 
 	private Student[] students = new Student[10];
 	private int counterStudent;
-	private String[] courseName = new String[10];
-	private int counterCourse;
-
-	public String addStudent(int rollNumber, String name) {
-
-		students[counterStudent++] = new Student(rollNumber, name);
+	
+	public String addStudent(int rollNumber,String name, String[] courseNames)
+	{
+		
+		students[counterStudent++]=new Student(rollNumber,name, courseNames);
 		return "Student added successfully";
-
+		
 	}
-
-	public void showAllStudents() {
-		System.out.println("-----------------------------------");
-		System.out.println("Roll Number 	|	 Name");
-
+	
+	public void showAllStudents()
+	{
 		for (int i = 0; i < counterStudent; i++) {
-			System.out.println(students[i].getRollNumber() + "            		 " + students[i].getName());
+			System.out.println(students[i]);
 		}
-
-		System.out.println("-----------------------------------");
 	}
-
-	public String addCourse(String course) {
-
-		courseName[counterCourse++] = course;
-
-		return "Course added successfully";
-	}
-
-	public void showAllCourses() {
-		System.out.println("-----------------------------------");
-		System.out.println("Course Name");
-
-		for (int i = 0; i < counterCourse; i++) {
-			System.out.println(courseName[i]);
-
+	
+	public String showStudentByRollNumber(int rollNumber)
+	{
+		for (int i = 0; i < counterStudent; i++) {
+			if(rollNumber==students[i].getRollNumber()){
+				return students[i].toString();
+			}
 		}
-		System.out.println("-----------------------------------");
+		return "No student found..";
+	}
+	
+	public boolean isRollNumberPresent(int rollNumber){
+		for (int i = 0; i < counterStudent; i++) {
+			if(rollNumber==students[i].getRollNumber()){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public int getStudentCountByCourse(String courseName){
+		int studentCount=0;
+		for (int i = 0; i < counterStudent; i++) {
+			inner:
+			for (int j = 0; j < students[i].getCourseNames().length; j++) {
+				if(courseName.equalsIgnoreCase(students[i].getCourseNames()[j])){
+					studentCount++;
+					break inner;
+				}
+			}
+		}
+		return studentCount;
 	}
 }
